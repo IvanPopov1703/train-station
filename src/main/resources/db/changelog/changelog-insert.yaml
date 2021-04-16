@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2
+      author: ivan_popov
+      comment: "Insert city"
+      changes:
+        - insert:
+            tableName: city
+            columns:
+              - column:
+                  name: name
+                  value: "Москва"
+        - insert:
+            tableName: city
+            columns:
+              - column:
+                  name: name
+                  value: "Воронеж"
+        - insert:
+            tableName: city
+            columns:
+              - column:
+                  name: name
+                  value: "Волгоград"

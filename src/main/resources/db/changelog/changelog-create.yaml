@@ -1,0 +1,504 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: ivan_popov
+      comment: "Create tables"
+      changes:
+        - createTable:                                 # создание таблицы - city
+            tableName: city
+            columns:
+              - column:
+                  name: city_id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+                    unique: true
+        - createTable:                                  # создание таблицы - railway_station
+            tableName: railway_station
+            columns:
+              - column:
+                  name: railway_station_id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: station_name
+                  type: VARCHAR(150)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: station_address
+                  type: VARCHAR(150)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: city_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            constraintName: railway_station_city_fk
+            baseTableName: railway_station
+            baseColumnNames: city_id
+            referencedTableName: city
+            referencedColumnNames: city_id
+            validate: true
+        - addUniqueConstraint:
+            constraintName: railway_station_name_and_addr_uk
+            columnNames: station_name, station_address
+            tableName: railway_station
+            validate: true
+        - createTable:                                # создание таблицы - route
+            tableName: route
+            columns:
+              - column:
+                  name: route_id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: from_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: to_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            constraintName: route_from_station_fk
+            baseTableName: route
+            baseColumnNames: from_id
+            referencedTableName: railway_station
+            referencedColumnNames: railway_station_id
+            validate: true
+        - addForeignKeyConstraint:
+            constraintName: route_to_station_fk
+            baseTableName: route
+            baseColumnNames: to_id
+            referencedTableName: railway_station
+            referencedColumnNames: railway_station_id
+            validate: true
+        - addUniqueConstraint:
+            constraintName: route_from_to_uk
+            columnNames: from_id, to_id
+            tableName: route
+            validate: true
+        - createTable:                                  # создание таблицы - train_stops
+            tableName: train_stops
+            columns:
+              - column:
+                  name: train_stops_id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: planned_departure_time
+                  type: TIME
+                  constraints:
+                    nullable: false
+              - column:
+                  name: planned_arrival_time
+                  type: TIME
+                  constraints:
+                    nullable: false
+              - column:
+                  name: route_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: railway_station_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            constraintName: train_stops_station_fk
+            baseTableName: train_stops
+            baseColumnNames: railway_station_id
+            referencedTableName: railway_station
+            referencedColumnNames: railway_station_id
+            validate: true
+        - addForeignKeyConstraint:
+            constraintName: train_stops_route_fk
+            baseTableName: train_stops
+            baseColumnNames: route_id
+            referencedTableName: route
+            referencedColumnNames: route_id
+            validate: true
+        - addUniqueConstraint:
+            constraintName: train_stops_railway_stat_route_pk
+            columnNames: railway_station_id, route_id
+            tableName: train_stops
+            validate: true
+        - createTable:                                      # создание таблицы - schedule
+            tableName: schedule
+            columns:
+              - column:
+                  name: schedule_id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: departure_date
+                  type: DATETIME
+                  constraints:
+                    nullable: false
+              - column:
+                  name: arrival_date
+                  type: DATETIME
+                  constraints:
+                    nullable: false
+              - column:
+                  name: route_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            constraintName: schedule_route_fk
+            baseTableName: schedule
+            baseColumnNames: route_id
+            referencedTableName: route
+            referencedColumnNames: route_id
+            validate: true
+        - createTable:                                  # создание таблицы - type_railway_carriage
+            tableName: type_railway_carriage
+            columns:
+              - column:
+                  name: type_railway_carriage_id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(150)
+                  constraints:
+                    nullable: false
+                    unique: true
+        - createTable:                                  # создание таблицы - seat_type
+            tableName: seat_type
+            columns:
+              - column:
+                  name: seat_type_id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(150)
+                  constraints:
+                    nullable: false
+                    unique: true
+        - createTable:                                          # создание таблицы - discount
+            tableName: discount
+            columns:
+              - column:
+                  name: discount_id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: percent
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+        - createTable:                                  # создание таблицы - role
+            tableName: role
+            columns:
+              - column:
+                  name: role_id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+                    unique: true
+        - createTable:                                      # создание таблицы - client
+            tableName: client
+            columns:
+              - column:
+                  name: client_id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: login
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: password
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: surname
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: patronymic
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: phone
+                  type: VARCHAR(15)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: date_of_birth
+                  type: DATE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: discount_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: role_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            constraintName: client_role_fk
+            baseTableName: client
+            baseColumnNames: role_id
+            referencedTableName: role
+            referencedColumnNames: role_id
+            validate: true
+        - addForeignKeyConstraint:
+            constraintName: client_discount_fk
+            baseTableName: client
+            baseColumnNames: discount_id
+            referencedTableName: discount
+            referencedColumnNames: discount_id
+            validate: true
+        - createTable:                                    # создание таблицы - railway_carriage
+            tableName: railway_carriage
+            columns:
+              - column:
+                  name: railway_carriage_id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: num
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: number_of_seats
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: type_railway_carriage_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            constraintName: railway_carriage_type_railway_carriage_fk
+            baseTableName: railway_carriage
+            baseColumnNames: type_railway_carriage_id
+            referencedTableName: type_railway_carriage
+            referencedColumnNames: type_railway_carriage_id
+            validate: true
+        - createTable:                                  # создание таблицы - railway_carriage_schedule
+            tableName: railway_carriage_schedule
+            columns:
+              - column:
+                  name: railway_carriage_schedule_id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: schedule_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: railway_carriage_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            constraintName: railway_carriage_schedule_railway_carriage_fk
+            baseTableName: railway_carriage_schedule
+            baseColumnNames: railway_carriage_id
+            referencedTableName: railway_carriage
+            referencedColumnNames: railway_carriage_id
+            validate: true
+        - addForeignKeyConstraint:
+            constraintName: railway_carriage_schedule_schedule_fk
+            baseTableName: railway_carriage_schedule
+            baseColumnNames: schedule_id
+            referencedTableName: schedule
+            referencedColumnNames: schedule_id
+            validate: true
+        - addUniqueConstraint:
+            constraintName: rail_carr_schedule_uk
+            columnNames: schedule_id, railway_carriage_id
+            tableName: railway_carriage_schedule
+            validate: true
+        - createTable:                                            # создание таблицы - seat
+            tableName: seat
+            columns:
+              - column:
+                  name: seat_id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: place_number
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: seat_type_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: railway_carriage_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            constraintName: seat_seat_type_fk
+            baseTableName: seat
+            baseColumnNames: seat_type_id
+            referencedTableName: seat_type
+            referencedColumnNames: seat_type_id
+            validate: true
+        - addForeignKeyConstraint:
+            constraintName: seat_railway_carriage_fk
+            baseTableName: seat
+            baseColumnNames: railway_carriage_id
+            referencedTableName: railway_carriage
+            referencedColumnNames: railway_carriage_id
+            validate: true
+        - addUniqueConstraint:
+            constraintName: seat_railway_carriage_place_number_uk
+            columnNames: railway_carriage_id, place_number
+            tableName: seat
+            validate: true
+        - createTable:                                  # создание таблицы - ticket
+            tableName: ticket
+            columns:
+              - column:
+                  name: ticket_id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: is_purchased
+                  type: BOOLEAN
+                  constraints:
+                    nullable: false
+              - column:
+                  name: price
+                  type: DOUBLE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: total_price
+                  type: DOUBLE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: client_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: schedule_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: seat_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            constraintName: ticket_client_fk
+            baseTableName: ticket
+            baseColumnNames: client_id
+            referencedTableName: client
+            referencedColumnNames: client_id
+            validate: true
+        - addForeignKeyConstraint:
+            constraintName: ticket_schedule_fk
+            baseTableName: ticket
+            baseColumnNames: schedule_id
+            referencedTableName: schedule
+            referencedColumnNames: schedule_id
+            validate: true
+        - addForeignKeyConstraint:
+            constraintName: ticket_seat_fk
+            baseTableName: ticket
+            baseColumnNames: seat_id
+            referencedTableName: seat
+            referencedColumnNames: seat_id
+            validate: true
+        - addUniqueConstraint:
+            constraintName: ticket_seat_schedule_uk
+            columnNames: schedule_id, seat_id
+            tableName: ticket
+            validate: true
