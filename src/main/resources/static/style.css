@@ -1,0 +1,326 @@
+body {
+    margin: 0;
+}
+
+a {
+    font-size: 20px;
+}
+
+button {
+    font-size: 17px;
+}
+
+p {
+    font-size: 20px;
+}
+
+
+/*Вся страница*/
+main {
+    /*border: black solid 1px;*/
+    /*height: 600px;*/
+    min-height: 750px;
+    max-height: 5000px;
+    /*background: ghostwhite;*/
+}
+
+/*Начало описания блока шапки*/
+header {
+    /*border: red solid 1px;*/
+    width: 1450px;
+    height: 200px;
+    border-radius: 10px;
+    margin: auto;
+    background: rgba(219, 219, 219, 0.74);
+}
+
+.logoImgDiv {
+    /*border: 1px blue solid;*/
+    width: 190px;
+    height: 190px;
+    margin-left: 10px;
+    float: left;
+}
+
+.logoTextDiv {
+    /*border: 1px blue solid;*/
+    width: 845px;
+    height: 100px;
+    margin-left: 200px;
+    margin-top: 50px;
+    float: left;
+}
+
+/*Конец описания блока шапки*/
+
+
+.leftButton {
+    font-size: 17px;
+}
+
+.login {
+    border: 1px solid green;
+    width: 410px;
+    height: 20px;
+    /*margin-left: 1040px;*/
+    margin-top: 7px;
+}
+
+/**************************************Описание блока сортировок КОНЕЦ***************************************/
+
+/*НАЧАЛО Описание блока контента на главной странице*/
+.content {
+    /*border: green 1px solid;*/
+    /*height: 220px;*/
+    min-height: 150px;
+    max-height: 2000px;
+    width: 1450px;
+    float: left;
+    margin-left: 40px;
+    margin-top: 40px;
+    border-radius: 10px;
+    background: rgba(219, 219, 219, 0.74);
+}
+
+.inpFrom {
+    height: 23px;
+    width: 250px;
+    font-size: 20px;
+}
+
+.fromBlock {
+    /*border: 1px solid green;*/
+    width: 260px;
+    height: 100px;
+    float: left;
+    margin-left: 30px;
+    margin-top: 25px;
+}
+
+.inpTo {
+    height: 23px;
+    width: 250px;
+    font-size: 20px;
+}
+
+.toBlock {
+    /*border: 1px solid green;*/
+    width: 260px;
+    height: 100px;
+    margin-left: 50px;
+    float: left;
+    margin-top: 25px;
+}
+
+.inpDateTravel {
+    height: 23px;
+    width: 250px;
+    font-size: 20px;
+}
+
+.dateTravelBlock {
+    /*border: 1px solid green;*/
+    width: 260px;
+    height: 100px;
+    margin-left: 50px;
+    float: left;
+    margin-top: 25px;
+}
+
+.btnSearchTicket {
+    height: 30px;
+}
+
+.btnSearchTicketBlock {
+    /*border: 1px solid green;*/
+    width: 160px;
+    height: 40px;
+    margin-left: 50px;
+    float: left;
+    margin-top: 45px;
+}
+/*КОНЕЦ Описание блока контента на главной странице*/
+
+
+/*НАЧАЛО описания блока с заголовками найденных билетов*/
+.headersToFoundTickets {
+    /*border: green 1px solid;*/
+    height: 50px;
+    width: 1110px;
+    float: left;
+    margin-left: 40px;
+    margin-top: 30px;
+    border-radius: 10px;
+    background: rgba(219, 219, 219, 0.74);
+}
+/*КОНЕЦ описания блока с заголовками найденных билетов*/
+
+
+/*НАЧАЛО Описание блока контента найденных билетов*/
+.contentFoundTicket {
+    /*border: green 1px solid;*/
+    /*height: 220px;*/
+    min-height: 150px;
+    max-height: 2000px;
+    width: 1110px;
+    float: left;
+    margin-left: 40px;
+    margin-top: 20px;
+    border-radius: 10px;
+    background: rgba(219, 219, 219, 0.74);
+}
+
+.contRoute {
+    /*border: green 1px solid;*/
+    padding-top: 10px;
+    height: 130px;
+    width: 170px;
+    margin-left: 15px;
+    float: left;
+}
+
+.contDeparture {
+    /*border: green 1px solid;*/
+    height: 100px;
+    width: 100px;
+    float: left;
+    margin-left: 70px;
+}
+
+.contArrival {
+    /*border: green 1px solid;*/
+    height: 100px;
+    width: 100px;
+    float: left;
+    margin-left: 100px;
+}
+
+.contSeats {
+    /*border: green 1px solid;*/
+    height: 140px;
+    width: 100px;
+    float: left;
+    margin-left: 115px;
+}
+
+.contPrice {
+    /*border: green 1px solid;*/
+    height: 140px;
+    width: 100px;
+    float: left;
+    margin-left: 80px;
+}
+
+.contSelectSeats {
+    /*border: green 1px solid;*/
+    height: 50px;
+    width: 100px;
+    float: left;
+    margin-top: 45px;
+    margin-left: 20px;
+}
+
+/*КОНЕЦ Описание блока контента найденных билетов*/
+
+/**************************************Описание блока контейнера с товаром начало********************************/
+
+/**************************************Описание блока сортировок НАЧАЛО***************************************/
+/*Левый контейнер для сортировки */
+.leftSort {
+    /*border: 1px solid blue;*/
+    width: 300px;
+    /*height: 700px;*/
+    min-height: 320px;
+    max-height: 600px;
+    float: left;
+    margin-left: 32px;
+    margin-top: 30px;
+    border-radius: 10px;
+    background: rgba(219, 219, 219, 0.74);
+}
+
+.leftHead {
+    border-radius: 10px;
+    height: 35px;
+    margin-top: -20px;
+    background: rgba(199, 199, 199, 0.74);
+    text-align: center;
+}
+
+.leftHeadOneFilter {
+    padding-left: 10px;
+}
+
+.leftButtonSort {
+    /*border: 1px solid darkorange;*/
+    margin-left: 75px;
+    margin-top: 35px;
+}
+
+.containerOneGood {
+    /*border: 1px solid black;*/
+    height: 200px;
+    /*background: rgba(219, 219, 219, 0.74);*/
+    background: rgba(199, 199, 199, 0.74);
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.titleOneGood {
+    color: red;
+}
+
+.imageOneGood {
+    /*border: 1px red solid;*/
+    width: 250px;
+    float: left;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.imgOneGood {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.textOneGood {
+    /*border: blue 1px solid;*/
+    height: 172px;
+    width: 850px;
+    float: left;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.costGood {
+    color: #b46d3e;
+}
+
+/**************************************Описание блока контейнера с товаром конец*********************************/
+
+
+/**************************************Описание подвала начало*********************************/
+footer {
+    /*border: 1px solid red;*/
+    height: 50px;
+    width: 1455px;
+    float: left;
+    margin-left: 35px;
+    margin-top: 300px;
+    border-radius: 10px;
+    background: rgba(219, 219, 219, 0.74);
+    text-align: center;
+}
+
+/**************************************Описание подвала конец*********************************/
+
+/**************************************Описание страницы авторизации НАЧАЛО*********************************/
+.contentAuthor {
+/ / border: 1 px solid red;
+    width: 500px;
+    height: 500px;
+    margin-left: 20px;
+}
+
+/**************************************Описание страницы авторизации КОНЕЦ*********************************/

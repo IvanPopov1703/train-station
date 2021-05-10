@@ -33,6 +33,11 @@ public class Role {
         this.name = role;
     }
 
+    public Role(Long id, String name) {
+        this.roleId = id;
+        this.name = name;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

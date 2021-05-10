@@ -1,22 +1,22 @@
 package ru.trainstation.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.trainstation.data.entity.City;
-import ru.trainstation.data.entity.RailwayStation;
-import ru.trainstation.data.entity.RailwayStation;
-import ru.trainstation.data.repository.RailwayStationRepository;
+import ru.trainstation.data.entity.Role;
+import ru.trainstation.data.repository.RoleRepository;
 import ru.trainstation.exception.NotFountException;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class RailwayStationService {
+public class RoleService {
 
-    private final RailwayStationRepository railwayStationRepository;
+    private final RoleRepository roleRepository;
 
-    public RailwayStationService(RailwayStationRepository railwayStationRepository) {
-        this.railwayStationRepository = railwayStationRepository;
+    @Autowired
+    public RoleService(RoleRepository roleRepository) {
+        this.roleRepository = roleRepository;
     }
 
     /**
@@ -24,9 +24,9 @@ public class RailwayStationService {
      *
      * @return список всех существующих записей
      */
-    public List<RailwayStation> getAllRailwayStations() {
-        var result = new ArrayList<RailwayStation>();
-        railwayStationRepository.findAll().forEach(result::add);
+    public List<Role> getAllRoles() {
+        var result = new ArrayList<Role>();
+        roleRepository.findAll().forEach(result::add);
         return result;
     }
 
@@ -40,19 +40,19 @@ public class RailwayStationService {
      * @throws NotFountException если запись с заданным
      * id не существует, то выбрасывается исключение
      */
-    public RailwayStation findById(Long id) throws NotFountException {
-        return railwayStationRepository.findById(id).orElseThrow(NotFountException::new);
+    public Role findById(Long id) throws NotFountException {
+        return roleRepository.findById(id).orElseThrow(NotFountException::new);
     }
 
     /**
      * Добавление новой записи
      *
-     * @param railwayStation добавляемая запись
+     * @param role добавляемая запись
      *
      * @return добавленная запись
      */
-    public RailwayStation save(RailwayStation railwayStation) {
-        return railwayStationRepository.save(railwayStation);
+    public Role save(Role role) {
+        return roleRepository.save(role);
     }
 
     /**
@@ -64,24 +64,24 @@ public class RailwayStationService {
      *         false - запись не найдена
      */
     public boolean existsById(Long id) {
-        return railwayStationRepository.existsById(id);
+        return roleRepository.existsById(id);
     }
 
     /**
      * Редактирование записи
      *
-     * @param railwayStation редактируемая запись
+     * @param role редактируемая запись
      *
      * @return отредактированная запись
      *
      * @throws NotFountException если записи в базе
      * не существует, то выбрасывается исключение
      */
-    public RailwayStation update(RailwayStation railwayStation) throws NotFountException {
-        if (railwayStation.getRailwayStationId() == null || !existsById(railwayStation.getRailwayStationId())) {
+    public Role update(Role role) throws NotFountException {
+        if (role.getRoleId() == null || !existsById(role.getRoleId())) {
             throw new NotFountException();
         }
-        return railwayStationRepository.save(railwayStation);
+        return roleRepository.save(role);
     }
 
     /**
@@ -97,6 +97,6 @@ public class RailwayStationService {
         if (!existsById(id)) {
             throw new NotFountException();
         }
-        railwayStationRepository.deleteById(id);
+        roleRepository.deleteById(id);
     }
 }
