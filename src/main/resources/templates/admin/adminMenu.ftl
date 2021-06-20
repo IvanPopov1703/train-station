@@ -10,7 +10,7 @@
     <a href="/api/admin/city/"><h3>Города</h3></a>
     <a href="/api/admin/railwayStation/"><h3>Типы вагонов</h3></a>
     <a href="adminMenu.ftl"><h3>Типы мест</h3></a>
-    <a href="adminMenu.ftl"><h3>Скидки</h3></a><br>
+    <a href="/api/admin/discount/"><h3>Скидки</h3></a><br>
     <a href="/api/admin/railwayStation/"><h3>Станции</h3></a>
     <a href="adminMenu.ftl"><h3>Маршруты</h3></a>
     <a href="adminMenu.ftl"><h3>Промежуточные остановки</h3></a>

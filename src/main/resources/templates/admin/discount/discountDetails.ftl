@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8"/>
-    <title>Детали станции</title>
+    <title>Детали скидки</title>
     <style>
         body {
             margin: 0;
@@ -35,41 +35,36 @@
 </head>
 <body>
 <main>
-    <h1>Станция</h1>
-    <#if station??>
+    <h1>Скидка</h1>
+    <#if discount??>
         <table border="0">
             <tr>
                 <td>Название</td>
                 <td>:</td>
-                <td>${station.name}</td>
+                <td>${discount.name}</td>
             </tr>
             <tr>
-                <td>Адрес</td>
+                <td>Процент</td>
                 <td>:</td>
-                <td>${station.address}</td>
-            </tr>
-            <tr>
-                <td>Город</td>
-                <td>:</td>
-                <td>${station.city.name}</td>
+                <td>${discount.percent}</td>
             </tr>
         </table>
         <br/>
         <#if allowDelete>
-            <form action="${'/api/admin/railwayStation/' + station.railwayStationId + '/delete'}" method="POST" style="font-size: 18px;">
+            <form action="${'/api/admin/discount/' + discount.discountId + '/delete'}" method="POST" style="font-size: 18px;">
                 Удалить запись? <input style="font-size: 15px;" type="submit" value="Да"/>
-                <a href="${'/api/admin/railwayStation/' + station.railwayStationId}"><button type="button">Отмена</button></a>
+                <a href="${'/api/admin/discount/' + discount.discountId}"><button type="button">Отмена</button></a>
             </form>
         <#else>
             <div>
-                <a href="${'/api/admin/railwayStation/' + station.railwayStationId + '/edit'}">
+                <a href="${'/api/admin/discount/' + discount.discountId + '/edit'}">
                     <button type="submit">Редактировать</button>
                 </a>
                 &nbsp;&nbsp;
-                <a href="${'/api/admin/railwayStation/' + station.railwayStationId + '/delete'}">
+                <a href="${'/api/admin/discount/' + discount.discountId + '/delete'}">
                     <button type="submit">Удалить</button>
                 </a><br><br>
-                <a href="/api/admin/railwayStation/"><button type="submit" style="width: 210px">Вернуться к списку</button></a>
+                <a href="/api/admin/discount/"><button type="submit" style="width: 210px">Вернуться к списку</button></a>
             </div>
         </#if>
     </#if>

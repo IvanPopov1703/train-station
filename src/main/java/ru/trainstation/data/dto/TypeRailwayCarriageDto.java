@@ -1,48 +1,29 @@
-package ru.trainstation.data.entity;
+package ru.trainstation.data.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.util.List;
 import java.util.Objects;
 
-@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class TypeRailwayCarriage {
+public class TypeRailwayCarriageDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long typeRailwayCarriageId;
 
     @NotEmpty(message = "Название роли не может быть пустым!")
     @Size(message = "Минимум 2 символа!", min = 2)
     private String name;
 
-    @OneToMany(mappedBy = "typeRailwayCarriage")
-    @JsonIgnoreProperties("typeRailwayCarriage")
-    private List<RailwayCarriage> railwayCarriageList;
-
-    public TypeRailwayCarriage(
-            Long typeRailwayCarriageId,
-            @NotEmpty(message = "Название роли не может быть пустым!")
-            @Size(message = "Минимум 2 символа!", min = 2) String name
-    ) {
-        this.typeRailwayCarriageId = typeRailwayCarriageId;
-        this.name = name;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        TypeRailwayCarriage that = (TypeRailwayCarriage) o;
+        TypeRailwayCarriageDto that = (TypeRailwayCarriageDto) o;
         return Objects.equals(typeRailwayCarriageId, that.typeRailwayCarriageId) &&
                 Objects.equals(name, that.name);
     }

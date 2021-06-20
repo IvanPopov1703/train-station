@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Data
@@ -48,14 +48,35 @@ public class RailwayStation {
     @JsonIgnoreProperties("railwayStation")
     private List<TrainStops> trainStopsList;
 
-    public RailwayStation(Long railwayStationId,
-                          String stationName,
-                          String stationAddress,
-                          City city
+    public RailwayStation(
+            Long railwayStationId,
+            @NotEmpty(message = "Поле не может быть пустым!")
+            @Size(message = "Поле дожно содержать от 2 до 145 символов!", min = 2, max = 145)
+                    String stationName,
+            @NotEmpty(message = "Поле не может быть пустым!")
+            @Size(message = "Поле дожно содержать от 2 до 145 символов!", min = 2, max = 145)
+                    String stationAddress,
+            @NotNull(message = "Поле не можеты быть пустым!") City city
     ) {
         this.railwayStationId = railwayStationId;
         this.stationName = stationName;
         this.stationAddress = stationAddress;
         this.city = city;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RailwayStation that = (RailwayStation) o;
+        return Objects.equals(railwayStationId, that.railwayStationId) &&
+                Objects.equals(stationName, that.stationName) &&
+                Objects.equals(stationAddress, that.stationAddress) &&
+                Objects.equals(city, that.city);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(railwayStationId, stationName, stationAddress, city);
     }
 }

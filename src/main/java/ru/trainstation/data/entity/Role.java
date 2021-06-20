@@ -29,12 +29,17 @@ public class Role {
     @JsonIgnoreProperties("role")
     private List<Client> clientList;
 
-    public Role(String role) {
-        this.name = role;
+    public Role(@NotEmpty(message = "Название роли не может быть пустым!")
+                @Size(message = "Минимум 2 символа!", min = 2) String name
+    ) {
+        this.name = name;
     }
 
-    public Role(Long id, String name) {
-        this.roleId = id;
+    public Role(Long roleId,
+                @NotEmpty(message = "Название роли не может быть пустым!")
+                @Size(message = "Минимум 2 символа!", min = 2) String name
+    ) {
+        this.roleId = roleId;
         this.name = name;
     }
 

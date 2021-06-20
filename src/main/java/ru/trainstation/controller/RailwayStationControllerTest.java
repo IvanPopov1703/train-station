@@ -19,16 +19,16 @@ import ru.trainstation.service.RailwayStationService;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/api/admin/test/railwayStation")
-public class RailwayStationController extends BaseController {
+@RequestMapping("/api/admin/railwayStation")
+public class RailwayStationControllerTest extends BaseController {
 
     private final RailwayStationService railwayStationService;
     private final RailwayStationMapper railwayStationMapper;
     private final CityService cityService;
     private final CityMapper cityMapper;
 
-    public RailwayStationController(RailwayStationService railwayStationService,
-                                    RailwayStationMapper railwayStationMapper, CityService cityService, CityMapper cityMapper) {
+    public RailwayStationControllerTest(RailwayStationService railwayStationService,
+                                        RailwayStationMapper railwayStationMapper, CityService cityService, CityMapper cityMapper) {
         this.railwayStationService = railwayStationService;
         this.railwayStationMapper = railwayStationMapper;
         this.cityService = cityService;
@@ -58,33 +58,31 @@ public class RailwayStationController extends BaseController {
     @RequestMapping(method = RequestMethod.GET, path = "/add")
     public String createRailwayStationPage(
             Model model,
-            @ModelAttribute("station") RailwayStationDto railwayStationDto
+            @ModelAttribute("station") RailwayStation railwayStation
     ) {
-        if (railwayStationDto.getName() != null) {
+        if (railwayStation.getStationName() != null) {
             model.addAttribute("err", "err");
         }
         model.addAttribute("add", true);
-        model.addAttribute("station", railwayStationDto);
+        model.addAttribute("station", railwayStation);
         model.addAttribute(
-                "cities",
-                cityMapper.toCityDto(cityService.getAllCities()));
+                "cities", cityService.getAllCities());
         return "admin/railwayStation/railwayStationEdit";
     }
 
     @RequestMapping(method = RequestMethod.POST, path = "/add")
     public String createRailwayStation(Model model,
-                             @ModelAttribute("station") @Valid RailwayStationDto railwayStationDto,
+                             @ModelAttribute("station") @Valid RailwayStation railwayStation,
                              BindingResult bindingResult,
                              RedirectAttributes redirectAttributes
     ) {
         if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("station", railwayStationDto);
+            redirectAttributes.addFlashAttribute("station", railwayStation);
             addValidationMessage(redirectAttributes, bindingResult);
             model.addAttribute("add", true);
             return "redirect:/api/admin/railwayStation/add";
         }
-        RailwayStation newRailwayStation = railwayStationService.save(
-                railwayStationMapper.toRailwayStationFromDto(railwayStationDto));
+        RailwayStation newRailwayStation = railwayStationService.save(railwayStation);
         return "redirect:/api/admin/railwayStation/" + String.valueOf(newRailwayStation.getRailwayStationId());
     }
 

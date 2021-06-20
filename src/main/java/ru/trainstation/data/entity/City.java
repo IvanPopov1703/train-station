@@ -29,8 +29,11 @@ public class City {
     @JsonIgnoreProperties("city")
     private List<RailwayStation> railwayStationList;
 
-    public City(Long id, String name) {
-        this.cityId = id;
+    public City(Long cityId,
+                @NotEmpty(message = "Название роли не может быть пустым!")
+                @Size(message = "Минимум 2 символа!", min = 2) String name
+    ) {
+        this.cityId = cityId;
         this.name = name;
     }
 
